@@ -18,7 +18,7 @@ export default function Counter() {
             onPress={() =>{
                 setCount(count +1)
             }}
-            title='Clique aqui'
+            title='Aumentar'
         />
       </View>
 

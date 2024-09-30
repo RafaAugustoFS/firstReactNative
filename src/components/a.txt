@@ -1,0 +1,120 @@
+import React, { useState } from "react";
+import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+ 
+export default function CadNews() {
+    const [formData, setFormData] = useState({
+        nome: '',
+        email: '',
+        telefone: '',
+        endereco: '',
+        genero: '',
+        senha: '',
+        validacao: ''
+    });
+ 
+    const handleChange = (name, value) => {
+        setFormData({ ... formData, [name]: value });
+    };
+ 
+    const handleSubmit = () => {
+        const { nome, email, telefone, endereco, genero, senha, validacao } = formData;
+ 
+        // Validação de formulário
+        if (!nome || !email || !senha || !telefone || !endereco || !genero || !validacao) {
+            alert('Por favor, preencha todos os campos.');
+            return;
+        }
+ 
+        if(!senha && !validacao){
+            alert('Senha incorreta')
+            return;
+        }
+        // Aqui você pode lidar com o envio dos dados
+        console.log("Nome: ", nome);
+        console.log("Email: ", email);
+        console.log("Senha: ", senha);
+ 
+        // Limpa os campos
+        setFormData({
+            nome: '',
+            email: '',
+            telefone: '',
+            endereco: '',
+            genero: '',
+            senha: '',
+            validacao: ''
+        });
+    };
+ 
+    return (
+        <View style={styles.container}>
+            <TextInput
+                style={styles.input}
+                placeholder="Digite seu nome"
+                value={formData.nome}
+                onChangeText={(value) => handleChange('nome', value)}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder="Digite seu email"
+                value={formData.email}
+                onChangeText={(value) => handleChange('email', value)}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder="Digite seu telefone"
+                value={formData.telefone}
+                onChangeText={(value) => handleChange('telefone', value)}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder="Digite seu endereço"
+                value={formData.endereco}
+                onChangeText={(value) => handleChange('endereco', value)}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder="Digite seu gênero"
+                value={formData.genero}
+                onChangeText={(value) => handleChange('genero', value)}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder="Digite sua senha"
+                secureTextEntry={true}
+                value={formData.senha}
+                onChangeText={(value) => handleChange('senha', value)}
+            />
+            <TextInput
+                style={styles.input}
+                placeholder="Confirme sua senha"
+                secureTextEntry={true}
+                value={formData.validacao}
+                onChangeText={(value) => handleChange('validacao', value)}
+            />
+            <Button title="Enviar" onPress={handleSubmit} />
+ 
+            {formData.nome && formData.email && formData.telefone && formData.endereco && formData.genero && formData.senha && formData.validacao && (
+                <Text>
+                    Nome: {formData.nome}, Email: {formData.email}, Telefone: {formData.telefone}, Endereço: {formData.endereco}, Gênero: {formData.genero} Senha: {formData.senha} Validação: {formData.validacao}
+                    Nova senha: {'*'.repeat(formData.senha.length)}
+                </Text>
+            )}
+        </View>
+    );
+}
+ 
+const styles = StyleSheet.create({
+    container: {
+        padding: 20,
+    },
+    input: {
+        height: 40,
+        borderColor: "gray",
+        borderWidth: 1,
+        marginBottom: 12,
+        paddingLeft: 8,
+    },
+});
+ 
+tem menu de contexto
